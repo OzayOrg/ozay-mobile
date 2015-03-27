@@ -1,0 +1,14 @@
+/* latin */
+@font-face {
+  font-family: 'AlexBrush';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/AlexBrush-Regular.ttf') format('truetype');
+}
+
+body {
+	font-family: 'AlexBrush';
+}
+
+.nav-title {
+}

@@ -1,0 +1,11 @@
+<ion-view>
+  <ion-content>
+	<ion-list>
+      <ion-item ng-repeat="buildinglist in buildinglists" href="#/app/buildinglists/{{buildinglist.title}}">
+       <div style="height:75px; text-align:center; line-height: 75px;">
+       		{{buildinglist.title}}
+       </div> 
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

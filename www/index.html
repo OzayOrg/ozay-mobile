@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- My custom css file goes here -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+
+    <script src="js/ng-cordova-oauth.min.js"></script>
+
+    <script type="text/javascript" src="lib/facebookConnectPlugin"></script>
+    <script type="text/javascript" src="lib/gmaps.js"></script>
+
+    <!-- push js -->
+    <script type="text/javascript" charset="utf-8" src="js/push.js"></script>
+
+    <!-- pushplugin js -->
+    <script type="text/javascript" charset="utf-8" src="js/PushNotification.js"></script>
+
+    <!-- jQuery js -->
+    <script type="text/javascript" charset="utf-8" src="js/jquery_1.5.2.min.js"></script>
+
+    <!-- ionic/angularjs js -->
+    <script type="text/javascript" charset="utf-8" src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script type="text/javascript" src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script type="text/javascript" src="lib/ngCordova/dist/ng-cordova-mocks.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/controllers.js"></script>
+  </head>
+
+  <body ng-app="starter">
+    <div class="bar bar-energized">
+        <p class="title" style="font-size:40px; font-family:'AlexBrush', sans-serif;">Ozay</p>
+    </div>
+    <div clas="blank-bar-creator" style="height:45px">
+    </div>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>
