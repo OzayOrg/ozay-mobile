@@ -20,6 +20,6 @@
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "com.ionic.keyboard",
-    "com.phonegap.plugins.PushPlugin"
+    "https://github.com/phonegap-build/PushPlugin.git"
   ]
 }
