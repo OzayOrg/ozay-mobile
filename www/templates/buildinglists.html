@@ -1,5 +1,8 @@
 <ion-view ng-init="init()">
   <ion-content>
+    <div class="item item-avatar">
+      <img ng-src="{{feedData.myPicture}}">
+    </div>
 	<ion-list>
       <ion-item ng-repeat="buildinglist in buildinglists" href="#/app/buildinglists/{{buildinglist.title}}">
        <div style="height:75px; text-align:center; line-height: 75px;">
@@ -7,8 +10,5 @@
        </div> 
       </ion-item>
     </ion-list>
-    <div class="item item-avatar">
-      <img ng-src="{{feedData.myPicture}}">
-    </div>
   </ion-content>
 </ion-view>
