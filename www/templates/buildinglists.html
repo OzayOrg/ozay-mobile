@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view ng-init="init()">
   <ion-content>
 	<ion-list>
       <ion-item ng-repeat="buildinglist in buildinglists" href="#/app/buildinglists/{{buildinglist.title}}">
@@ -7,5 +7,8 @@
        </div> 
       </ion-item>
     </ion-list>
+    <div class="item item-avatar">
+      <img ng-src="{{feedData.myPicture}}">
+    </div>
   </ion-content>
 </ion-view>

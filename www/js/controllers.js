@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+    alert('Doing login', $scope.loginData);
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
@@ -35,16 +35,24 @@ angular.module('starter.controllers', [])
   */
 })
 
-.controller('LoginCtrl', function($scope, $http, $cordovaOauth) {
+.controller('LoginCtrl', function($scope, $http, $cordovaOauth, $localStorage, $location) {
+    $scope.myValue=true;
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-    $scope.myTitle="jjsj";
-    $scope.login = function() {
-        $cordovaOauth.google("433457765042-8sttl5kdok7c92d74ciu4e8p8idrpnjl.apps.googleusercontent.com", ["email"]).then(function(result) {
-            console.log("Response Object -> " + JSON.stringify(result));
-        }, function(error) {
-            console.log("Error -> " + error);
-        });
-    };
+    if($localStorage.hasOwnProperty("accessToken") === false) {
+      $scope.facebookLogin = function() {
+          $cordovaOauth.facebook("838683446202918", ["email", "read_stream", "user_website", "user_location", "user_relationships"]).then(function(result) {
+              $localStorage.accessToken = result.access_token;
+              alert('successful registration');
+              $location.path("/buildinglists");
+          }, function(error) {
+              alert("There was a problem signing in!  See the console for logs");
+              alert(error);
+          });
+      };
+    }
+    else {
+      $location.path("/buildinglists");
+    }
  
     if (typeof String.prototype.startsWith != 'function') {
         String.prototype.startsWith = function (str){
@@ -54,29 +62,30 @@ angular.module('starter.controllers', [])
     
 })
  
-.controller('SecureCtrl', function($scope, $http) {
- 
-    $scope.accessToken = accessToken;
-    
-})
-
-.controller('BuildinglistsCtrl', function($scope) {
+.controller('BuildinglistsCtrl', function($scope,$http, $localStorage, $location) {
   $scope.buildinglists = [
     { title: 'BUILDING ONE', id: 1 },
     { title: 'EAST RIVER TOWER', id: 2 },
     { title: 'BUILDING THREE', id: 3 },
     { title: 'BUILDING FOUR', id: 4 },
   ];
-})
 
-.controller("OauthExample", function($scope, $cordovaOauth) {
-  $scope.googleLogin = function() {
-      $cordovaOauth.google("CLIENT_ID_HERE", ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]).then(function(result) {
-          console.log(JSON.stringify(result));
+  $scope.init = function() {
+    if($localStorage.hasOwnProperty("accessToken") === true) {
+      $http.get("https://graph.facebook.com/v2.2/me/feed", { params: { access_token: $localStorage.accessToken, format: "json" }}).then(function(result) {
+          $scope.feedData = result.data.data;
+          $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: $localStorage.accessToken, fields: "picture", format: "json" }}).then(function(result) {
+              $scope.feedData.myPicture = result.data.picture.data.url;
+          });
       }, function(error) {
+          alert("There was a problem getting your profile.  Check the logs for details.");
           console.log(error);
       });
-  }
+    } else {
+        alert("Not signed in");
+        $location.path("/login");
+    }
+  };
 
 })
 

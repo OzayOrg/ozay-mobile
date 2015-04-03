@@ -1,22 +1,47 @@
 <ion-view view-title="{{myTitle}}">
   <ion-content>
-    <div>
-        <button ng-click="login()" class="button button-block button-balanced">Oauth Sign In</button>
-        <p>
-            Clicking the above button will initiate an official browser sign in flow with Facebook.  You
-            will be redirected to the Facebook website to enter your credentials.
-        </p>
+    <div class="button-bar button-clear">
+      <a class="button"></a>
+      <a class="button"></a>
+      <a class="button button-stable" ng-click="myValue=true" ng-show="!myValue">Log In</a>
+      <a class="button button-stable" ng-click="myValue=false" ng-show="myValue">Sign Up</a>
     </div>
-    <div class="list">
-        <a class="item" href="#" onclick="window.open('http://www.nraboy.com/contact', '_system', 'location=yes'); return false;">
-            Open a Browser
-        </a>
-        <a class="item" href="#" onclick="window.open('http://www.twitter.com/nraboy', '_system', 'location=yes'); return false;">
-            Open a Twitter Client or Browser
-        </a>
-        <a class="item" href="#" onclick="window.open('https://plus.google.com/+NicRaboy', '_system', 'location=yes'); return false;">
-            Open a Google+ Client or Browser
-        </a>
+    <form ng-show="myValue">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <div class="inputbg"><input type="text" ng-model="loginData.username"></div>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password&nbsp;</span>
+          <div class="inputbg"><input type="password" ng-model="loginData.password"></div>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit" ng-click="doLogin(loginData)">Log In</button>
+        </label>
+      </div>
+    </form>
+    <form ng-show="!myValue">
+      <div class="list" >
+        <label class="item item-input">
+          <span class="input-label">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <div class="inputbg-sp"><input type="text" ng-model="reg.name"></div>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <div class="inputbg"><input type="text" ng-model="reg.username"></div>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password&nbsp;</span>
+          <div class="inputbg"><input type="password" ng-model="reg.password"></div>
+        </label>
+        <label class="item">
+          <button class="button button-block button-energized" type="submit" ng-click="doReg(reg)">Register</button>
+        </label>
+      </div>
+    </form>
+    <div class="padding">
+        <button ng-click="facebookLogin()" class="button button-block button-royal">Facebook LogIn</button>
     </div>
     </ion-content>
 </ion-view>

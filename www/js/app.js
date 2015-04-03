@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers','ngCordova','ngStorage'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,6 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    navigator.splashscreen.hide();
   });
 })
 
@@ -29,16 +30,6 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
     abstract: true,
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
-  })
-
-  .state('app.login', {
-    url: "/login",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/login.html",
-        controller: 'LoginCtrl'
-      }
-    }
   })
 
   .state('app.secure', {
@@ -61,11 +52,17 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
     }
   })
 
+  .state('login', {
+    url: "/login",
+    templateUrl: "templates/login.html",
+    controller: 'LoginCtrl'
+  })
+
   .state('buildinglists', {
     url: "/buildinglists",
     templateUrl: "templates/buildinglists.html",
     controller: 'BuildinglistsCtrl'
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/buildinglists');
+  $urlRouterProvider.otherwise('/login');
 });
