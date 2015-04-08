@@ -1,6 +1,8 @@
 var pushNotification;
 
 function onDeviceReady() {               
+    navigator.splashscreen.hide();    
+    /*
     document.addEventListener("backbutton", function(e)
     {
         alert('backbutton event received');
@@ -17,14 +19,15 @@ function onDeviceReady() {
             navigator.app.backHistory();
         }
     }, false);
-
+    */
     try 
     { 
         pushNotification = window.plugins.pushNotification;
-        //alert('registering ' + device.platform);
+        
         if (device.platform == 'android' || device.platform == 'Android' ||
                 device.platform == 'amazon-fireos' ) {
-            pushNotification.register(successHandler, errorHandler, {"senderID":"agile-tracker-89410","ecb":"onNotification"});        // required!
+            
+            pushNotification.register(successHandler, errorHandler, {"senderID":"433457765042","ecb":"onNotification"});        // required!
                 }
         else {
             pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});    // required!
@@ -59,17 +62,16 @@ function onNotificationAPN(e) {
 
 // handle GCM notifications for Android
 function onNotification(e) {
-    alert('EVENT -> RECEIVED:' + e.event);
-    
+        
     switch( e.event )
     {
         case 'registered':
         if ( e.regid.length > 0 )
         {
-            alert('REGISTERED -> REGID:' + e.regid);
+            //alert('regID:\n' + e.regid);
             // Your GCM push server needs to know the regID before it can push to this device
             // here is where you might want to send it the regID for later use.
-            alert("regID = " + e.regid);
+            console.log("regID = " + e.regid);
         }
         break;
         
@@ -78,9 +80,9 @@ function onNotification(e) {
             // you might want to play a sound to get the user's attention, throw up a dialog, etc.
             if (e.foreground)
             {
-                alert('--INLINE NOTIFICATION--');
+                alert('INLINE NOTIFICATION');
                   
-                    // on Android soundname is outside the payload. 
+                        // on Android soundname is outside the payload. 
                         // On Amazon FireOS all custom attributes are contained within payload
                         var soundfile = e.soundname || e.payload.sound;
                         // if the notification contains a soundname, play it.
@@ -92,24 +94,23 @@ function onNotification(e) {
             else
             {   // otherwise we were launched because the user touched a notification in the notification tray.
                 if (e.coldstart)
-                    alert('<li>--COLDSTART NOTIFICATION--' + '</li>');
+                    alert('COLDSTART NOTIFICATION');
                 else
-                alert('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                alert('BACKGROUND NOTIFICATION');
             }
                 
-            alert('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+            alert('MESSAGE -> MSG: ' + e.payload.message);
             //android only
-            alert('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+            //alert('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
             //amazon-fireos only
-            alert('<li>MESSAGE -> TIMESTAMP: ' + e.payload.timeStamp + '</li>');
         break;
         
         case 'error':
-            alert('<li>ERROR -> MSG:' + e.msg + '</li>');
+            alert('ERROR -> MSG:' + e.msg);
         break;
         
         default:
-            alert('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+            alert('EVENT -> Unknown, an event was received and we do not know what it is');
         break;
     }
 }
@@ -121,7 +122,7 @@ function tokenHandler (result) {
 }
 
 function successHandler (result) {
-    alert('Successfully registered : '+ result);
+    alert('registered : '+ result);
 }
 
 function errorHandler (error) {

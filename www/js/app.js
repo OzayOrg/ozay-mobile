@@ -18,7 +18,6 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova','ngStorage
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    navigator.splashscreen.hide();
   });
 })
 

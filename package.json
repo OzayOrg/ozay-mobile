@@ -16,9 +16,10 @@
   },
   "cordovaPlugins": [
     "org.apache.cordova.splashscreen",
-    "org.apache.cordova.inappbrowser",
     "org.apache.cordova.device",
     "org.apache.cordova.console",
+    "org.apache.cordova.media",
+    "org.apache.cordova.inappbrowser",
     "com.ionic.keyboard",
     "https://github.com/phonegap-build/PushPlugin.git"
   ]
